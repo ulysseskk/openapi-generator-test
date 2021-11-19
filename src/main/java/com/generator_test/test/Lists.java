@@ -1,4 +1,4 @@
-package com.genetor_test.test;
+package com.generator_test.test;
 
 import org.openapitools.codegen.cmd.ListGenerators;
 

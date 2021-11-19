@@ -1,4 +1,4 @@
-package com.genetor_test.test;
+package com.generator_test.test;
 
 import org.apache.commons.io.IOUtils;
 import org.openapitools.codegen.ClientOptInput;
@@ -18,19 +18,12 @@ public class GeneratorTest {
         ListGenerators listGenerators = new ListGenerators();
         listGenerators.execute();
         CodegenConfigurator configurator = CodegenConfigurator.fromFile("generator_servers.yaml");
-        configurator.setGeneratorName("spring");
-        configurator.setInputSpec("generator_servers.yaml");
-        configurator.setPackageName("com.ulyssesk.generators.server");
-        configurator.setOutputDir("spring-files/");
+        configurator.setGeneratorName("go");  // 生成器的类型,见readme.md
+        configurator.setInputSpec("generator_servers.yaml"); // 源文件的目录
+        configurator.setPackageName("test_client");
+        configurator.setOutputDir("go-files/");
         Generator generator = new DefaultGenerator(false);
-        ClientOptInput clientOptInput = configurator.toClientOptInput();
-        SpringCodegen springCodegen = (SpringCodegen)clientOptInput.getConfig();
-        springCodegen.setBasePackage("com.ulyssesk.generators.server");
-        springCodegen.setConfigPackage("com.ulyssesk.generators.server.config");
-        springCodegen.setApiPackage("com.ulyssesk.generators.server.api");
-        springCodegen.setModelPackage("com.ulyssesk.generators.server.model");
-        clientOptInput.config(springCodegen);
-        List<File> files = generator.opts(clientOptInput).generate();
+        List<File> files = generator.opts(configurator.toClientOptInput()).generate();
         files.forEach(file -> {
             System.out.println(file.getName());
         });
