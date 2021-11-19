@@ -10,6 +10,9 @@ java13
 通过修改configurator.setGeneratorName的参数来决定输出的格式，具体枚举值见"附录1"     
 通过修改configurator.setInputSpec参数来修改输入的yaml文件目录
 
+####示例
+根据generator_servers.yaml生成的go client在go-files文件夹下
+
 ####附录1：Generator枚举：
 
 CLIENT generators:

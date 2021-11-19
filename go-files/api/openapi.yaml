@@ -1,0 +1,144 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: apiteam@swagger.io
+  description: ':dog: :cat: :rabbit: This is a sample server Petstore server.  You
+    can find out more about Swagger at [http://swagger.io](http://swagger.io) or on
+    [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can
+    use the api key `special-key` to test the authorization filters.'
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Petstore
+  version: 1.0.0
+externalDocs:
+  description: See AsyncAPI example
+  url: https://mermade.github.io/shins/asyncapi.html
+servers:
+- url: http://petstore.swagger.io/v2
+tags:
+- description: Everything about your Pets
+  externalDocs:
+    description: Find out more
+    url: http://swagger.io
+  name: pet
+- description: Access to Petstore orders
+  name: store
+- description: Operations about user
+  externalDocs:
+    description: Find out more about our store
+    url: http://swagger.io
+  name: user
+paths:
+  /client_code_gen:
+    post:
+      description: 根据openapi yaml文件生成client代码
+      operationId: Generate client code
+      parameters:
+      - description: 生成器名称，使用GET /code_genenerators获取枚举
+        explode: true
+        in: query
+        name: generator_name
+        required: true
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: true
+        description: 代码包名称
+        explode: true
+        in: query
+        name: package_name
+        required: false
+        schema:
+          default: client
+          type: string
+        style: form
+      responses:
+        default:
+          description: Default response
+      summary: client代码生成
+  /code_genenerators:
+    get:
+      description: 获取代码生成器名称列表
+      operationId: get client code generators
+      parameters: []
+      responses:
+        default:
+          description: Default response
+      summary: 获取代码生成器名称列表
+  /doc_generators:
+    get:
+      description: 获取文档生成器名称列表
+      operationId: Get doc generators
+      parameters: []
+      responses:
+        default:
+          description: Default response
+      summary: 获取文档生成器名称列表
+  /doc_gen:
+    post:
+      description: 根据openapi yaml文件生成接口文档
+      operationId: generate doc
+      parameters:
+      - description: 生成器名称，使用GET /doc_generators获取枚举
+        explode: true
+        in: query
+        name: generator_name
+        required: true
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/yaml:
+            schema: {}
+        description: 上传的OPEN-API yaml配置文件
+        required: false
+      responses:
+        default:
+          description: Default response
+      summary: 生成文档
+components:
+  callbacks: {}
+  links: {}
+  requestBodies:
+    Pet:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Pet'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Pet'
+      description: Pet object that needs to be added to the store
+      required: true
+    UserArray:
+      content:
+        application/json:
+          schema:
+            items:
+              $ref: '#/components/schemas/User'
+            type: array
+      description: List of user object
+      required: true
+  schemas:
+    ApiResponse:
+      properties:
+        code:
+          format: int32
+          type: integer
+        type:
+          type: string
+        message:
+          type: string
+      type: object
+  securitySchemes:
+    x-access-username:
+      in: header
+      name: x-access-username
+      type: apiKey
+    x-access-token:
+      in: header
+      name: api_key
+      type: apiKey
