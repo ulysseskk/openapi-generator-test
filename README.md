@@ -1,19 +1,19 @@
  测试根据Open API规范文件生成文档和代码
-==
+==  
 
 ### 依赖：     
 maven   
 java13
 
-###使用说明：
+### 使用说明：
 可以通过com.generator_test.test.GeneratorTest类的main方法来进行测试。     
-通过修改configurator.setGeneratorName的参数来决定输出的格式，具体枚举值见"附录1"     
-通过修改configurator.setInputSpec参数来修改输入的yaml文件目录
+可以通过all参数来输出ascii、markdown、go
 
-####示例
+
+#### 示例
 根据generator_servers.yaml生成的go client在go-files文件夹下
 
-####附录1：Generator枚举：
+#### 附录1：Generator枚举：
 
 CLIENT generators:
 - ada
